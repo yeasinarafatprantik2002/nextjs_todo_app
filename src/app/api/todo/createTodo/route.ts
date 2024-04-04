@@ -5,29 +5,27 @@ import { getDataFromToken } from "@/helpers/getDataFromToken";
 
 connect();
 
-export async function DELETE(request: NextRequest) {
+export async function POST(request: NextRequest) {
   try {
     const userId = getDataFromToken(request);
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const reqBody = await request.json();
-    const { id } = reqBody;
+    const { title, description } = reqBody;
 
-    const todo = await Todo.findById(id);
-    if (!todo) {
-      return NextResponse.json({ error: "Todo not found" }, { status: 404 });
-    }
-    if (todo.user.toString() !== userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    const newTodo = new Todo({
+      title,
+      description,
+      user: userId,
+    });
 
-    const deletedTodo = await Todo.findByIdAndDelete(id);
+    const savedTodo = await newTodo.save();
 
     return NextResponse.json({
-      message: "Todo deleted",
+      message: "Todo created",
       success: true,
-      todo: deletedTodo,
+      todo: savedTodo,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
