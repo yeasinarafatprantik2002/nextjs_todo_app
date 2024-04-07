@@ -8,7 +8,7 @@ connect();
 
 export async function PUT(request: NextRequest) {
   try {
-    const userId = getDataFromToken(request);
+    const userId = await getDataFromToken(request);
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
