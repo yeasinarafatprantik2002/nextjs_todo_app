@@ -85,7 +85,7 @@ export default function Home() {
   return (
     <main>
       <div className="flex flex-col items-center justify-start py-2 mt-10">
-        <div className=" text-4xl font-bold">Welocome to todo App</div>
+        <div className=" text-4xl font-bold">/-/ Welocome To My Todo App \-\</div>
         <div className=" mt-10 flex flex-col">
           <h1 className=" text-4xl">{loading ? "Adding Todo" : "Add Todo"}</h1>
           <label htmlFor="title" className="text-xl mt-4 ">
