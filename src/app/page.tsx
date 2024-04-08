@@ -7,7 +7,11 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [todo, setTodo] = useState({ title: "", description: "" });
+  const [todo, setTodo] = useState({
+    title: "",
+    description: "",
+    isCompleted: Boolean,
+  });
   const [todos, setTodos] = useState([]);
 
   const handleSubmit = async (e: any) => {
@@ -42,6 +46,28 @@ export default function Home() {
       toast.error(error.message);
     }
   };
+
+  // const handleComplete = async (
+  //   id: any,
+  //   title: String,
+  //   description: String,
+  // ) => {
+  //   try {
+  //     // console.log(todo);
+  //     await axios.put("/api/todo/updateTodo", {
+  //       id: id,
+  //       title: title,
+  //       description: description,
+  //       isCompleted: true,
+  //     });
+
+  //     toast.success("Todo completed successfully");
+  //   } catch (error: any) {
+  //     console.error(error);
+  //     toast.error(error.message);
+  //   }
+  // };
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
@@ -104,12 +130,20 @@ export default function Home() {
                 <div className=" flex flex-wrap items-center border border-white">
                   <p className=" p-3 rounded">Title: {t.title}</p>
                   <p className=" p-3 rounded ">Description: {t.description}</p>
+
                   <div>
                     <button
                       className=" p-2 border border-gray-300 rounded-lg m-4 focus:outline-none focus:border-gray-600"
                       onClick={() => handleUpdate(t._id)}>
                       Edit
                     </button>
+                    {/* <button
+                      className=" p-2 border border-gray-300 rounded-lg m-4 focus:outline-none focus:border-gray-600"
+                      onClick={() => {
+                        handleComplete(t._id, t.title, t.description);
+                      }}>
+                      Complete
+                    </button> */}
                     <button
                       className=" p-2 border border-gray-300 rounded-lg m-4 focus:outline-none focus:border-gray-600"
                       onClick={() => {
