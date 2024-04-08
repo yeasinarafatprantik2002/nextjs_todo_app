@@ -19,7 +19,7 @@ function LoginPage() {
       const response = await axios.post("/api/users/login", user);
       console.log(response.data);
       toast.success("Login successful");
-      router.push("/profile");
+      router.push("/");
       setLoading(false);
     } catch (error: any) {
       console.error(error);
