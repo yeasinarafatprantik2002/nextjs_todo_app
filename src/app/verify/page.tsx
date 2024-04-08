@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
@@ -41,26 +41,24 @@ const VerifyPage = () => {
   }, [token]);
 
   return (
-    <Suspense>
-      <div className=" flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className=" text-4xl">Verify Email</h1>
-        <hr />
-        <h2 className=" p-2 bg-orange-500 text-black">
-          {token.length > 0 ? `${token}` : "No token"} {}
-        </h2>
-        {verified && (
-          <div>
-            <h1>Email Verified</h1>
-            <Link href="/login">Login</Link>
-          </div>
-        )}
-        {error && (
-          <div>
-            <h1>Email varification error</h1>
-          </div>
-        )}
-      </div>
-    </Suspense>
+    <div className=" flex flex-col items-center justify-center min-h-screen py-2">
+      <h1 className=" text-4xl">Verify Email</h1>
+      <hr />
+      <h2 className=" p-2 bg-orange-500 text-black">
+        {token.length > 0 ? `${token}` : "No token"} {}
+      </h2>
+      {verified && (
+        <div>
+          <h1>Email Verified</h1>
+          <Link href="/login">Login</Link>
+        </div>
+      )}
+      {error && (
+        <div>
+          <h1>Email varification error</h1>
+        </div>
+      )}
+    </div>
   );
 };
 
