@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       message: "Todo fetched successfully",
       success: true,
-      todo,
+      todo: todo,
     });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });

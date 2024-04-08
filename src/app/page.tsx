@@ -2,8 +2,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [todo, setTodo] = useState({ title: "", description: "" });
   const [todos, setTodos] = useState([]);
@@ -26,6 +28,15 @@ export default function Home() {
         data: { id: id },
       });
       toast.success("Todo deletion successful");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  };
+
+  const handleUpdate = async (id: any) => {
+    try {
+      router.push(`/updateTodo/${id}`);
     } catch (error: any) {
       console.error(error);
       toast.error(error.message);
@@ -94,7 +105,9 @@ export default function Home() {
                   <p className=" p-3 rounded">Title: {t.title}</p>
                   <p className=" p-3 rounded ">Description: {t.description}</p>
                   <div>
-                    <button className=" p-2 border border-gray-300 rounded-lg m-4 focus:outline-none focus:border-gray-600">
+                    <button
+                      className=" p-2 border border-gray-300 rounded-lg m-4 focus:outline-none focus:border-gray-600"
+                      onClick={() => handleUpdate(t._id)}>
                       Edit
                     </button>
                     <button
